@@ -1,6 +1,11 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useCoursesQuery } from "../utils/api";
 
 const Teacher = () => {
+  const { data, isError, isLoading } = useCoursesQuery("")
+
+  if (isLoading) return <h2>Loading...</h2>;
+  if (isError) return <h2>Error</h2>;
   return (
     <div className="container-fluid min-vh-100 bg-light p-3 d-flex flex-column">
       <header className="d-flex justify-content-between align-items-center bg-white rounded shadow-sm p-3 mb-4">
@@ -22,7 +27,27 @@ const Teacher = () => {
           </ul>
         </nav>
         <main className="flex-grow-1 ms-4">
-          <Outlet />
+          <div>
+            <div className="col-12 col-md-9 col-lg-10">
+              <div className="row g-3">
+                {
+                  data.filter((itm: any) => itm.id === Number(localStorage.getItem("token")))
+                    .map((itm: any, i: number) => {
+                      return <div key={i} className="col-6 col-md-3">
+                        <div className="card shadow-sm">
+                          <div className="card-img-top bg-secondary-subtle d-flex align-items-center justify-content-center" style={{ height: "120px" }}>
+                            <img className="card-img-top bg-secondary-subtle d-flex align-items-center justify-content-center" style={{ height: "120px" }} src={itm.Img} alt="" />
+                          </div>
+                          <div className="card-body text-center">
+                            <div className="fw-semibold">{itm.Lesson}</div>
+                          </div>
+                        </div>
+                      </div>
+                    })
+                }
+              </div>
+            </div>
+          </div>
         </main>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAddUserMutation } from "../utils/api";
 import { actions } from "../utils/toolkit";
 const SignUp = (props: any) => {
@@ -25,8 +25,7 @@ const SignUp = (props: any) => {
                     <option value="teacher">Teacher</option>
                 </select>
                 <button onClick={signUser} style={{ width: 100 + "%" }} className="btn btn-dark">Sign Up</button>
-                <p className="text-center my-3">Or</p>
-                <p className="text-center">if you have account? - <Link to={"/signIn"}>Sign In</Link></p>
+                <p></p>
             </div>
         </div>
     );
